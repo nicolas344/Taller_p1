@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container">
+        <!-- Search Form -->
+        <form action="" method="GET">
+            <div class="mb-3">
+                <label for="searchMovie" class="form-label">
+                    Search for Movie:
+                </label>
+                <input type="text" class="form-control" name="searchMovie" id="searchMovie"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <p>Searching for: {{ searchTerm }}</p>
+
+        <!-- Movies Grid -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for movie in movies %}
+                <div class="col">
+                    <div class="card">
+                        <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">{{ movie.title }}</h5>
+                            <p class="card-text">{{ movie.description }}</p>
+                            <p class="card-text">{{ movie.genre }}</p>
+                            <p class="card-text">{{ movie.year }}</p>
+                            {% if movie.url %}
+                                <a href="{{ movie.url }}" class="btn btn-primary">Movie Link</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <h2>Join our mailing list:</h2>
+        <form action="{% url 'signup' %}">
+            <div class="mb-3">
+                <label for="email" class="form-label">Enter your email:</label>
+                <input type="email" class="form-control" name="email"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    </div>
+{% endblock content %}
